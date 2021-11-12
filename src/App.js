@@ -1,9 +1,7 @@
 import './App.css'
-import React, {Component} from 'react';
+import React, {Component, useState, useRef} from 'react';
 import Result from './components/Result'
 import Search from './components/Search';
-
-
 
 class App extends Component{
   
@@ -13,7 +11,8 @@ class App extends Component{
       super(props)
       this.state = {
           loading:true,
-          words:[]
+          words:[],
+          Query:''
       }
   }
 
@@ -34,7 +33,6 @@ class App extends Component{
           console.log(result)
           const {words} = result
           this.setState({loading: false, words})
-          
       })
   }
 
@@ -48,7 +46,24 @@ class App extends Component{
       console.log("unmount")
   }
 
+    // input에 입력하자마자 검색
+    // handleInput = (e) => {
+    //     this.setState({Query: e.target.value});
+    // }
+
+    // input에 입력한 값을 버튼 클릭시 동작하도록 하는 이벤트
+    handleInput = (keyword) => {
+        this.setState({Query: keyword});
+    }
+
   render(){
+
+    const Query = this.state;
+    const filterWords = this.state.words.filter((word)=>
+        word.keyword.includes(this.state.Query)
+    );
+    
+
       const {loading, words} = this.state
       if(loading){ // loading의 상태값이 true이면
           return(
@@ -62,7 +77,7 @@ class App extends Component{
                 <div className="searchArea">
                     <div className="container">
                         <div className="row">
-                            <Search/>
+                            <Search handleInput={this.handleInput}/>
                         </div>
                     </div>
                 </div>
@@ -71,7 +86,7 @@ class App extends Component{
                     <div className="container">
                         <div className="row">
                             <div className="resultInner" id="result" >
-                                {words.map(word => {
+                                {filterWords.map(word => {
                                     return(
                                         <Result
                                             key={word._id}
