@@ -24,7 +24,7 @@ class App extends Component{
 
   // 컴포넌트가 생성되었을 때
   componentDidMount(){
-      const BASE_URL = 'https://dictionary-search-haeng.herokuapp.com/api/words';
+      const BASE_URL = 'https://dic-search-kor.herokuapp.com/api/words/';
       console.log("mount")
       console.log("-----------------")
       // 서버에서 데이터 가져오기
@@ -66,7 +66,7 @@ class App extends Component{
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="resultArea">
                     <div className="container">
                         <div className="row">
