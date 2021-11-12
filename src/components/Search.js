@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 
-function Search() {
+function Search({handleInput}) {
 
     const [Query, setQuery] = useState(""); // value=""와 동일
     const queryRef = useRef();
@@ -28,10 +28,8 @@ function Search() {
         )
     }
 
-    // input
-    const handleInput = (e) => {
-        setQuery(e.target.value);
-        console.log(Query);
+    const onFiliter = (e) => {
+        handleInput(e)
     }
 
     return (
@@ -41,7 +39,7 @@ function Search() {
                 <SelectBox options={Options} defaultValue="none"></SelectBox>
             </div>
             <div className="col-6 inputArea">
-                <input type="text" placeholder="단어를 입력해주세요" id="search" className="form-control"  onChange={(e)=>handleInput(e)} autoFocus/>
+                <input type="text" placeholder="단어를 입력해주세요" id="search" className="form-control" onChange={(e)=>onFiliter(e)} autoFocus/>
             </div>
             <div className="col-3 buttonArea">
                 <input type="submit" className="form-control" id="submit" value="검색"/>
