@@ -46,9 +46,14 @@ class App extends Component{
       console.log("unmount")
   }
 
-  // input
-    handleInput = (e) => {
-        this.setState({Query: e.target.value});
+    // input에 입력하자마자 검색
+    // handleInput = (e) => {
+    //     this.setState({Query: e.target.value});
+    // }
+
+    // input에 입력한 값을 버튼 클릭시 동작하도록 하는 이벤트
+    handleInput = (keyword) => {
+        this.setState({Query: keyword});
     }
 
   render(){
