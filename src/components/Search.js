@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react/cjs/react.development';
 import SearchBar from './SearchBar';
 import datas from './Keyword';
-import React from 'react';
 
 const Search = (props) => {
     // 검색어 자동완성에 쓸 데이터
@@ -69,13 +68,12 @@ const Search = (props) => {
 
     // enter키 이벤트 추가
     const onKeyEvent = (e) => {
-        e.preventDefault()
         if(e.key === 'Enter'){
             onClick()
         } else if (e.keyCode === 40) {
             console.log('1')
             queryRef.current.focus()
-        } else if (e.key === 'ArrowUp') {
+        } else if (e.keyCode === 38) {
             console.log('2')
             queryRef.current.focus()
         }
@@ -87,7 +85,7 @@ const Search = (props) => {
                 {/* Warning: Use the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>. */}
                 <SelectBox options={Options} defaultValue="none"></SelectBox>
             </div>
-                <SearchBar keyword={Query} results={results} updateField={updateField} onKeyPress={onKeyEvent} textInput={queryRef}></SearchBar>
+                <SearchBar keyword={Query} results={results} updateField={updateField} onKeyPress={e => onKeyEvent(e)} textInput={queryRef}></SearchBar>
                 {/* <SearchBar handleChange={(e)=>onFilter(e)} onKeyPress={onKeyEvent}></SearchBar> */}
             <div className="col-3 buttonArea">
                 <input 
