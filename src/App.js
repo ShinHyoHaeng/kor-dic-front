@@ -1,7 +1,8 @@
 import './App.css'
 import React, {Component, useState, useRef} from 'react';
 import Result from './components/Result'
-import Search from './components/Search';
+import Search from './components/Search'
+import NoResults from './components/noResult';
 
 class App extends Component{
   
@@ -12,7 +13,9 @@ class App extends Component{
       this.state = {
           loading:true,
           words:[],
-          Query:''
+          Query:'',
+          isException:false,
+          exceptionType:''
       }
   }
 
@@ -53,7 +56,14 @@ class App extends Component{
 
     // input에 입력한 값을 버튼 클릭시 동작하도록 하는 이벤트
     handleInput = (keyword) => {
-        this.setState({Query: keyword});
+        if(/[a-z]/i.test(keyword))
+        this.setState({Query:'',isException:true,exceptionType:'eng'})
+        else if(/\d/.test(keyword))
+        this.setState({Query:'',isException:true,exceptionType:'num'})
+        else if(/[`!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/.test(keyword))
+        this.setState({Query:'',isException:true,exceptionType:'str'})
+        else
+        this.setState({Query: keyword,isException:false});
     }
 
   render(){
@@ -66,7 +76,7 @@ class App extends Component{
     );
     
 
-      const {loading, words} = this.state
+      const {loading, words, exceptionType, isException} = this.state
       if(loading){ // loading의 상태값이 true이면
           return(
               <div>
@@ -88,9 +98,12 @@ class App extends Component{
                     <div className="container">
                         <div className="row">
                             <div className="resultInner" id="result" >
-                                {filterWords.map(word => {
-                                    return(
-                                        <Result
+                            {
+                                    isException?(
+                                        <NoResults exceptionType={exceptionType}/>
+                                    ):(filterWords.map(word => {
+                                        return(
+                                            <Result
                                             key={word._id}
                                             seq={word.seq}
                                             keyword={word.keyword}
@@ -98,10 +111,11 @@ class App extends Component{
                                             hanja={word.hanja}
                                             word_class={word.word_class}
                                             meaning={word.meaning}
-                                        >
-                                        </Result>
-                                    )
-                                })}
+                                            >
+                                            </Result>
+                                        )
+                                    }))
+                                }
                             </div>
                         </div>
                     </div>

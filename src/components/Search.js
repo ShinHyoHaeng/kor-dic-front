@@ -11,6 +11,8 @@ const Search = (props) => {
     const [results, setResult] = useState([]);
     const queryRef = useRef();
     const [Selected, setSelected] = useState("none");
+    const [exceptionType, setexceptionType] = useState('');
+    const [isException, setException] = useState(false);
   
     // 필드를 업데이트 
     const updateField = (field, value, update = true) => {
