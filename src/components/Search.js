@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react/cjs/react.development';
 import SearchBar from './SearchBar';
-import datas from './Keyword';
+import datas from './Keyword.js';
 
 const Search = (props) => {
     // 검색어 자동완성에 쓸 데이터
