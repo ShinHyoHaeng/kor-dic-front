@@ -61,6 +61,8 @@ class App extends Component{
     const Query = this.state;
     const filterWords = this.state.words.filter((word)=>
         word.keyword.includes(this.state.Query)
+        || word.meaning.includes(this.state.Query)
+        || word.word_class.includes(this.state.Query)
     );
     
 
