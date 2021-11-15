@@ -2,6 +2,7 @@ import './App.css'
 import React, {Component, useState, useRef} from 'react';
 import Result from './components/Result'
 import Search from './components/Search';
+import NoResults from './components/NoResults';
 
 class App extends Component{
   
@@ -12,7 +13,9 @@ class App extends Component{
       this.state = {
           loading:true,
           words:[],
-          Query:''
+          Query:'',
+          isException:false,
+          ExceptionType:''
       }
   }
 
@@ -32,7 +35,7 @@ class App extends Component{
       .then(result => {
           console.log(result)
           const {words} = result
-          this.setState({loading: false, words})
+          this.setState({loading: false, words, isException: false})
       })
   }
 
@@ -54,60 +57,77 @@ class App extends Component{
     // input에 입력한 값을 버튼 클릭시 동작하도록 하는 이벤트
     handleInput = (keyword) => {
         this.setState({Query: keyword});
+
+        // 숫자 판별 함수
+        const checkIfStringHasNumbers = (str) => {
+            var regExp = /\d/;
+            return regExp.test(str) ? true : false;
+        };
+
+        if(checkIfStringHasNumbers(keyword)){
+            this.setState({Query: "", isException: true, exceptionType:'num'});
+        }else{
+            this.setState({Query: keyword, isException: false, exceptionType:''});
+            console.log("is Exeption: false")
+        }
     }
 
-  render(){
+    render(){
+        const filterWords = this.state.words.filter((word)=>
+            word.keyword.includes(this.state.Query)
+        );
 
-    const Query = this.state;
-    const filterWords = this.state.words.filter((word)=>
-        word.keyword.includes(this.state.Query)
-    );
-    
-
-      const {loading, words} = this.state
-      if(loading){ // loading의 상태값이 true이면
-          return(
-              <div>
-                  <h1>loading...</h1>
-              </div>
-          )
-      }else{
-          return (
-            <div className="wrapper">
-                <div className="searchArea">
-                    <div className="container">
-                        <div className="row">
-                            <Search handleInput={this.handleInput}/>
+        const {loading, words, Query, isException, exceptionType} = this.state
+        if(loading){ // loading의 상태값이 true이면
+            return(
+                <div>
+                    <h1>loading...</h1>
+                </div>
+            )
+        }else{
+            return (
+                <div className="wrapper">
+                    <div className="searchArea">
+                        <div className="container">
+                            <div className="row">
+                                <Search handleInput={this.handleInput}/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div className="resultArea">
-                    <div className="container">
-                        <div className="row">
-                            <div className="resultInner" id="result" >
-                                {filterWords.map(word => {
-                                    return(
-                                        <Result
-                                            key={word._id}
-                                            seq={word.seq}
-                                            keyword={word.keyword}
-                                            link={word.link}
-                                            hanja={word.hanja}
-                                            word_class={word.word_class}
-                                            meaning={word.meaning}
-                                        >
-                                        </Result>
-                                    )
-                                })}
+                    
+                    <div className="resultArea">
+                        <div className="container">
+                            <div className="row">
+                                <div className="resultInner" id="result" >
+                                    {
+                                        isException ?
+                                        (
+                                            <NoResults exceptionType={exceptionType} />
+                                        ):(
+                                            filterWords.map(word => {
+                                                return(
+                                                    <Result
+                                                        key={word._id}
+                                                        seq={word.seq}
+                                                        keyword={word.keyword}
+                                                        link={word.link}
+                                                        hanja={word.hanja}
+                                                        word_class={word.word_class}
+                                                        meaning={word.meaning}
+                                                    >
+                                                    </Result>
+                                                )
+                                            })
+                                        )
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-          )
-      } 
-  }
+            )
+        }
+    }
 }
 
 export default App;

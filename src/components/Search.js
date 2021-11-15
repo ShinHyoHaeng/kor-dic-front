@@ -5,7 +5,8 @@ function Search(props) {
     const [Query, setQuery] = useState(""); // value=""와 동일
     const queryRef = useRef();
     const [Selected, setSelected] = useState("none");
-
+    const [isException, setIsException] = useState(false)
+    const [exceptionType, setExeptionType] = useState('');
 
     //select
     const Options = [
@@ -50,7 +51,6 @@ function Search(props) {
     return (
         <div className="searchInner">
             <div className="col-3 selectArea">
-                {/* Warning: Use the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>. */}
                 <SelectBox options={Options} defaultValue="none"></SelectBox>
             </div>
             <div className="col-6 inputArea">
