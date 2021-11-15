@@ -55,15 +55,15 @@ class App extends Component{
     // }
 
     // input에 입력한 값을 버튼 클릭시 동작하도록 하는 이벤트
-    handleInput = (Query) => {
-        if(/[a-z]/i.test(Query))
+    handleInput = (keyword) => {
+        if(/[a-z]/i.test(keyword))
         this.setState({Query:'',isException:true,exceptionType:'eng'})
-        else if(/\d/.test(Query))
+        else if(/\d/.test(keyword))
         this.setState({Query:'',isException:true,exceptionType:'num'})
-        else if(/[`!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/.test(Query))
+        else if(/[`!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/.test(keyword))
         this.setState({Query:'',isException:true,exceptionType:'str'})
         else
-        this.setState({Query: Query,isException:false});
+        this.setState({Query: keyword,isException:false});
     }
 
   render(){
