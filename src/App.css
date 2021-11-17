@@ -20,9 +20,10 @@ input:focus, select:focus, option:focus, textarea:focus, button:focus{outline: n
 .resultInner{width:60%; margin:0 auto;}
 .resultInner .item{border:1px solid #ddd;  padding:1.5em; position:relative; margin-bottom:1em;}
 .item .word{font-weight:bold; font-size:1.25em; padding-bottom:1.5em;}
+.item .word .icon{font-size:1em;}
 .item .word sup{font-size:0.5em; padding-left:0.25em;}
 .item .word .hanja{font-weight:400; display:inline; padding-left:0.25em;}
-.item .word a{font-size: 0.75em; color: #fff; display: inline-block; position: absolute; top: 1.75em; right: 1.5em; padding: 0.5em; background: #8a8076; border-radius: 5px; text-decoration: none; }
+.item .word a{font-size: 0.75em; color: #fff; display: inline-block; position: absolute; top: 1.3em; right: 1.5em; padding: 0.5em; background: #8a8076; border-radius: 5px; text-decoration: none; }
 .item .word a:visited{text-decoration: none;}
 .item .description{margin:0; line-height:1.5em;}
 .item .description span{font-weight:700; color:#56a078; margin-right:0.5em; }
