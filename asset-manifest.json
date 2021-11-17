@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/kor-dic-front/static/css/main.c47cc614.chunk.css",
-    "main.js": "/kor-dic-front/static/js/main.7826e598.chunk.js",
-    "main.js.map": "/kor-dic-front/static/js/main.7826e598.chunk.js.map",
+    "main.js": "/kor-dic-front/static/js/main.16d864fa.chunk.js",
+    "main.js.map": "/kor-dic-front/static/js/main.16d864fa.chunk.js.map",
     "runtime-main.js": "/kor-dic-front/static/js/runtime-main.b66e87e8.js",
     "runtime-main.js.map": "/kor-dic-front/static/js/runtime-main.b66e87e8.js.map",
     "static/css/2.a75f5a2c.chunk.css": "/kor-dic-front/static/css/2.a75f5a2c.chunk.css",
@@ -21,6 +21,6 @@
     "static/css/2.a75f5a2c.chunk.css",
     "static/js/2.f3a10a11.chunk.js",
     "static/css/main.c47cc614.chunk.css",
-    "static/js/main.7826e598.chunk.js"
+    "static/js/main.16d864fa.chunk.js"
   ]
 }
