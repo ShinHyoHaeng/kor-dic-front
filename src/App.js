@@ -69,6 +69,15 @@ class App extends Component{
   render(){
 
     const Query = this.state;
+    const filterWords_word = this.state.words.filter((word)=>
+        word.keyword.includes(this.state.Query)
+        );
+    const filterWords_meaning = this.state.words.filter((word)=>
+        word.meaning.includes(this.state.Query)
+        );
+    const filterWords_word_class = this.state.words.filter((word)=>
+        word.word_class.includes(this.state.Query)
+        );
     const filterWords = this.state.words.filter((word)=>
         word.keyword.includes(this.state.Query)
         || word.meaning.includes(this.state.Query)

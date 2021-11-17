@@ -40,23 +40,22 @@ const Search = (props) => {
         // 데이터베이스에 있는 단어 앞부분과 입력된 텍스트를 비교해서 일치하면 true 아니면 false
         return word === keyword.toString().toLowerCase();
     };
-
-    //select
     const Options = [
         {value:"none", name:"전체"},
         {value:"word", name:"단어"},
         {value:"mean", name:"의미"},
         {value:"wordclass", name:"품사"}
     ]
+    //select
     const SelectBox = (props) => {
-        const handleSelect = (e) => { 
-            setSelected(e.target.value);
+        const handleSelect = (e) => {
+            setSelected(e.target.value)
             console.log(e.target.value);
         }
         return(
-            <select name="select" className="form-control" id="select" onChange={handleSelect}>
-                {props.options.map((option) => (
-                    <option key={option.value} value={option.value} defaultValue={props.defaultValue === option.value}>{option.name}</option>
+            <select value={Selected} name="select" className="form-control" id="select" onChange={handleSelect}>
+                {props.options.map((options) => (
+                    <option key={options.value} value={options.value} defaultValue={props.defaultValue === options.value}>{options.name}</option>
                 ))}
             </select>
         )
