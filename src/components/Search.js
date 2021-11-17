@@ -29,13 +29,16 @@ const Search = (props) => {
         if (keyword === "") return false; // 입력된 텍스트가 없으면 false
         return word === keyword.toString().toLowerCase(); // 데이터베이스에 있는 단어 앞부분과 입력된 텍스트를 비교해서 일치하면 true 아니면 false
     };
+
+    // select option
     const Options = [
         {value:"none", name:"전체"},
         {value:"word", name:"단어"},
         {value:"mean", name:"의미"},
         {value:"wordclass", name:"품사"}
     ]
-    //select
+
+    //select 구현 및 이벤트 
     const SelectBox = (props) => {
         const handleSelect = (e) => {
             setSelected(e.target.value)
@@ -50,12 +53,13 @@ const Search = (props) => {
         )
     }
 
+    // 버튼 클릭 이벤트
     const onClick = () => {
         props.handleInput(Query)
         props.changefilter(Selected)
     }
 
-    // enter키 이벤트 추가
+    // 키보드 이벤트
     const onKeyEvent = (e) => {
         if(e.key === 'Enter'){
             onClick()
@@ -71,10 +75,14 @@ const Search = (props) => {
     return (
         <div className="searchInner">
             <div className="col-3 selectArea">
-                <SelectBox options={Options} defaultValue="none"></SelectBox>
+                <SelectBox options={Options} defaultValue="none"/>
             </div>
-                <SearchBar keyword={Query} results={results} updateField={updateField} onKeyPress={e => onKeyEvent(e)} textInput={queryRef}></SearchBar>
-                {/* <SearchBar handleChange={(e)=>onFilter(e)} onKeyPress={onKeyEvent}></SearchBar> */}
+                <SearchBar 
+                    keyword={Query} 
+                    results={results} 
+                    updateField={updateField} 
+                    onKeyPress={e => onKeyEvent(e)} 
+                    textInput={queryRef}/>
             <div className="col-3 buttonArea">
                 <input 
                     type="submit" 

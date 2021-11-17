@@ -6,7 +6,6 @@ import NoResults from './components/NoResults';
 
 class App extends Component{
 
-  
     // 생성자 함수
     constructor(props){
         console.log('constructor')
@@ -21,40 +20,16 @@ class App extends Component{
         }
     }
 
-    // 이벤트 핸들러 함수
-    changeName = () => {
-        this.setState({name:"name changed"})
-    }
-
-    // 컴포넌트가 생성되었을 때
+    // 컴포넌트가 생성되었을 때 서버에서 데이터 가져오기
     componentDidMount(){
         const BASE_URL = 'https://dictionary-search-haeng.herokuapp.com/api/words';
-        console.log("mount")
-        console.log("-----------------")
-        // 서버에서 데이터 가져오기
         fetch(BASE_URL)
         .then(res => res.json())
         .then(result => {
-            console.log(result)
             const {words} = result
             this.setState({loading: false, words})
         })
     }
-
-    // 컴포넌트가 업데이트 되었을 때
-    componentDidUpdate(){
-        console.log("update")
-    }
-
-    // 컴포넌트가 제거되었을 때
-    componentWillUnmount(){
-        console.log("unmount")
-    }
-
-    // input에 입력하자마자 검색
-    // handleInput = (e) => {
-    //     this.setState({Query: e.target.value});
-    // }
 
     // input에 입력한 값을 버튼 클릭시 동작하도록 하는 이벤트
     handleInput = (keyword) => {
@@ -68,6 +43,7 @@ class App extends Component{
         this.setState({Query: keyword,isException:false});
     }
 
+    // select에서 선택한 값에 맞춰 state 변경
     changefilter = (selected) => {
         if (selected === 'none') {
             this.setState({selected: 'none'})
@@ -81,23 +57,25 @@ class App extends Component{
     }
 
     render(){
-        let filterWords;
         const {loading, selected, exceptionType, isException} = this.state
-        if (selected === 'none') {
+
+        let filterWords;
+        
+        if (selected === 'none') { // selelct에서 '전체' 선택 시
             filterWords = this.state.words.filter((word)=>
                 word.keyword.includes(this.state.Query)
                 || word.meaning.includes(this.state.Query)
                 || word.word_class.includes(this.state.Query)
             );
-        } else if (selected === 'word') {
+        } else if (selected === 'word') {  // selelct에서 '단어' 선택 시
             filterWords = this.state.words.filter((word)=>
                 word.keyword.includes(this.state.Query)
             );
-        } else if (selected === 'mean') {
+        } else if (selected === 'mean') {  // selelct에서 '의미' 선택 시
             filterWords = this.state.words.filter((word)=>
                 word.meaning.includes(this.state.Query)
             );
-        } else if (selected === 'wordclass') {
+        } else if (selected === 'wordclass') {  // selelct에서 '품사' 선택 시
             filterWords = this.state.words.filter((word)=>
                 word.word_class.includes(this.state.Query)
             );
