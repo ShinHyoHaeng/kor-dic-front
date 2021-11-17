@@ -1,5 +1,5 @@
 import { Error } from '@material-ui/icons'
-import React, { useState } from 'react'
+import React from 'react'
 
 function NoResults({exceptionType}) {
     if(exceptionType === 'num'){
