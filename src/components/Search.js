@@ -1,43 +1,9 @@
 import { useRef, useState } from 'react/cjs/react.development';
 import SearchBar from './SearchBar';
-// import datas from './Keyword.js';
+import datas from './Keyword.js';
 
 const Search = (props) => {
-    // 검색어 자동완성에 쓸 데이터
-    const [data, setData] = useState([
-        {
-            id: 0,
-            word: '학교'
-        },
-        {
-            id: 1,
-            word: '학원'
-        },
-        {
-            id: 2,
-            word: '소설'
-        },
-        {
-            id: 3,
-            word: '수학'
-        },
-        {
-            id: 4,
-            word: '역사'
-        },
-        {
-            id: 5,
-            word: '가다'
-        },
-        {
-            id: 6,
-            word: '나'
-        },
-        {
-            id: 7,
-            word: '고리'
-        }
-    ]); // 입력창에 입력한 텍스트 
+    // 입력창에 입력한 텍스트 
     const [Query, setQuery] = useState(""); // value=""와 동일
     const [results, setResult] = useState([]); // 검색어 자동완성 텍스트
     const [Selected, setSelected] = useState("none");
@@ -52,7 +18,7 @@ const Search = (props) => {
   
     // 입력된 텍스트로 data 배열에서 찾아 매칭되는 결과들을 저장 
     const onSearch = text => {
-        var results = data.filter(item => true === matchName(item.word, text));
+        var results = datas.filter(item => true === matchName(item.word, text));
         setResult({ results });
     };
 
