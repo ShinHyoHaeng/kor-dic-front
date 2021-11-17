@@ -34,7 +34,7 @@ const SearchBar = (props) => {
                 onChange={e => props.updateField("keyword", e.target.value)}
                 onKeyPress={e => props.onKeyPress(e)}
             />
-            <div className="autocomplete-items" ref={props.textInput}>{renderResults}</div>
+            <div className={`autocomplete-items ${props.keyword ? 'active':''}`} ref={props.textInput}>{renderResults}</div>
         </div>
     );
 };
