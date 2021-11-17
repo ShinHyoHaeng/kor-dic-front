@@ -28,7 +28,7 @@ input:focus, select:focus, option:focus, textarea:focus, button:focus{outline: n
 .item .description{margin:0; line-height:1.5em;}
 .item .description span{font-weight:700; color:#56a078; margin-right:0.5em; }
 
-/* exception */
+/* exception(예외처리) */
 .exceptionArea{padding:3em 0; margin:150px auto 0 auto; position:relative; z-index: 1; text-align: center; font-size: 1.125em;}
 .exceptionArea .icon{font-size: 3.5em; margin-bottom: 0.25em; color: #77655a;}
 .exceptionArea span{font-weight: 700; color: #77655a;}
@@ -290,6 +290,7 @@ input:focus, select:focus, option:focus, textarea:focus, button:focus{outline: n
     .resultInner .item{border-radius: 10px;}
     .item .word{font-size:1em; padding-bottom:1em;}
     .item .description{font-size: 0.85em;}
+    .exceptionArea{margin: 0 auto;}
     
 
 }@media (max-width:768px){
