@@ -6,7 +6,7 @@ input:focus, select:focus, option:focus, textarea:focus, button:focus{outline: n
 
 /* search */
 .searchArea{background: #77655a; position:fixed; top:0; left:0; right:0; display: flex; justify-content: center; align-items: center; height:auto; z-index: 2;}
-.searchInner{width:60%; margin:3em auto; display: flex; align-items: center; justify-content: center; position:relative; overflow:hidden;}
+.searchInner{width:60%; margin:3em auto; display: flex; align-items: center; justify-content: center; position:relative;}
 .searchInner .form-control{line-height: 1em; border-radius: 0; font-size: 1rem; height:50px;}
 .searchInner select{width: 100%; padding:1em 1.5em; background:url(./select-arrow.svg) no-repeat #fff 95% center; background-size:48px auto;border:0; border-right:1px solid #ddd; border-radius: 0px; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
 .searchInner input{padding:1em 1.5em; border:0; width: 100%; width: -moz-available; width: -webkit-fill-available; width: fill-available;}    
@@ -34,7 +34,8 @@ input:focus, select:focus, option:focus, textarea:focus, button:focus{outline: n
 
 
 /* auto complete */
-.autocomplete-items {position: absolute; z-index: 99; top: 100%; left: 0; right: 0; background:#fff; border:1px solid #77655a; border-top: 1px solid rgba(119,101,90,0.3);}
+.autocomplete-items {position: absolute; z-index: 99; top: 100%; left: 0; right: 0; background:#fff;}
+.autocomplete-items .active{border:1px solid #77655a; border-top: 1px solid rgba(119,101,90,0.3);}
 .autocomplete-items div {padding: 1em 1.5em; cursor: pointer; border-bottom:1px solid rgba(119,101,90,0.3); font-size:0.75em;}
 .autocomplete-items div:last-child{border-bottom:0;}
 .autocomplete-items div:hover {background-color: #eaeae0;}
