@@ -88,8 +88,8 @@ class App extends Component{
       const {loading, words, exceptionType, isException} = this.state
       if(loading){ // loading의 상태값이 true이면
           return(
-              <div>
-                  <h1>loading...</h1>
+              <div className="loaderWrapper">
+                  <div className="loader">loading...</div>
               </div>
           )
       }else{

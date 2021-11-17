@@ -29,7 +29,7 @@ const SearchBar = (props) => {
             <input
                 id="search"
                 className="form-control"
-                placeholder="Search"
+                placeholder="검색어를 입력하세요"
                 value={props.keyword || ''}
                 onChange={e => props.updateField("keyword", e.target.value)}
                 onKeyPress={e => props.onKeyPress(e)}
