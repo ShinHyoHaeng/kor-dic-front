@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/kor-dic-front/static/css/main.c47cc614.chunk.css",
-    "main.js": "/kor-dic-front/static/js/main.16d864fa.chunk.js",
-    "main.js.map": "/kor-dic-front/static/js/main.16d864fa.chunk.js.map",
+    "main.css": "/kor-dic-front/static/css/main.56fd975b.chunk.css",
+    "main.js": "/kor-dic-front/static/js/main.b62b70d8.chunk.js",
+    "main.js.map": "/kor-dic-front/static/js/main.b62b70d8.chunk.js.map",
     "runtime-main.js": "/kor-dic-front/static/js/runtime-main.b66e87e8.js",
     "runtime-main.js.map": "/kor-dic-front/static/js/runtime-main.b66e87e8.js.map",
     "static/css/2.a75f5a2c.chunk.css": "/kor-dic-front/static/css/2.a75f5a2c.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.6c2232f8.chunk.js.map": "/kor-dic-front/static/js/3.6c2232f8.chunk.js.map",
     "index.html": "/kor-dic-front/index.html",
     "static/css/2.a75f5a2c.chunk.css.map": "/kor-dic-front/static/css/2.a75f5a2c.chunk.css.map",
-    "static/css/main.c47cc614.chunk.css.map": "/kor-dic-front/static/css/main.c47cc614.chunk.css.map",
+    "static/css/main.56fd975b.chunk.css.map": "/kor-dic-front/static/css/main.56fd975b.chunk.css.map",
     "static/js/2.f3a10a11.chunk.js.LICENSE.txt": "/kor-dic-front/static/js/2.f3a10a11.chunk.js.LICENSE.txt",
     "static/media/App.css": "/kor-dic-front/static/media/select-arrow.4d2cff88.svg"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.b66e87e8.js",
     "static/css/2.a75f5a2c.chunk.css",
     "static/js/2.f3a10a11.chunk.js",
-    "static/css/main.c47cc614.chunk.css",
-    "static/js/main.16d864fa.chunk.js"
+    "static/css/main.56fd975b.chunk.css",
+    "static/js/main.b62b70d8.chunk.js"
   ]
 }
