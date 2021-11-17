@@ -1,5 +1,5 @@
 import './App.css'
-import React, {Component, useState, useRef} from 'react';
+import React, {Component} from 'react';
 import Result from './components/Result'
 import Search from './components/Search'
 import NoResults from './components/NoResults';
