@@ -4,22 +4,16 @@ import datas from './Keyword.js';
 
 const Search = (props) => {
     // 검색어 자동완성에 쓸 데이터
-    const [data, setData] = useState(datas);
-    // 입력창에 입력한 텍스트 
+    const [data, setData] = useState(datas); // 입력창에 입력한 텍스트 
     const [Query, setQuery] = useState(""); // value=""와 동일
-    // 검색어 자동완성 텍스트
-    const [results, setResult] = useState([]);
-    const queryRef = useRef();
+    const [results, setResult] = useState([]); // 검색어 자동완성 텍스트
     const [Selected, setSelected] = useState("none");
-    const [exceptionType, setexceptionType] = useState('');
-    const [isException, setException] = useState(false);
+    const queryRef = useRef();
   
     // 필드를 업데이트 
     const updateField = (field, value, update = true) => {
-        // onSearch에 입력창에 입력된 텍스트을 넘긴다.
-        if (update) onSearch(value);
-        // 필드가 keyword면 keyword값 변경 / results면 results값 변경
-        if (field === 'keyword') { setQuery(value); }
+        if (update) onSearch(value); // onSearch에 입력창에 입력된 텍스트을 넘긴다.
+        if (field === 'keyword') { setQuery(value); } // 필드가 keyword면 keyword값 변경 / results면 results값 변경
         if (field === 'results') { setResult(value); }
     }
   
@@ -30,15 +24,11 @@ const Search = (props) => {
     };
 
     // 검색해야할 문자열을 키워드와 비교하여 매칭이 되는지 체크 
-    // word는 데이터베이스에 있는 단어 / keyword는 입력한 단어
-    const matchName = (word, keyword) => {
+    const matchName = (word, keyword) => {  // word는 데이터베이스에 있는 단어 / keyword는 입력한 단어
         var keyLen = keyword.length;
-        // 데이터베이스에 있는 단어를 입력한 텍스트의 개수만큼 자른다.
-        word = word.toLowerCase().substring(0, keyLen);
-        // 입력된 텍스트가 없으면 false
-        if (keyword === "") return false;
-        // 데이터베이스에 있는 단어 앞부분과 입력된 텍스트를 비교해서 일치하면 true 아니면 false
-        return word === keyword.toString().toLowerCase();
+        word = word.toLowerCase().substring(0, keyLen); // 데이터베이스에 있는 단어를 입력한 텍스트의 개수만큼 자른다.
+        if (keyword === "") return false; // 입력된 텍스트가 없으면 false
+        return word === keyword.toString().toLowerCase(); // 데이터베이스에 있는 단어 앞부분과 입력된 텍스트를 비교해서 일치하면 true 아니면 false
     };
     const Options = [
         {value:"none", name:"전체"},
@@ -81,7 +71,6 @@ const Search = (props) => {
     return (
         <div className="searchInner">
             <div className="col-3 selectArea">
-                {/* Warning: Use the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>. */}
                 <SelectBox options={Options} defaultValue="none"></SelectBox>
             </div>
                 <SearchBar keyword={Query} results={results} updateField={updateField} onKeyPress={e => onKeyEvent(e)} textInput={queryRef}></SearchBar>
