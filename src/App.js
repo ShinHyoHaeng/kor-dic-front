@@ -44,7 +44,7 @@ class App extends Component{
     }
 
     // select에서 선택한 값에 맞춰 state 변경
-    changefilter = (selected) => {
+    changeSelected = (selected) => {
         if (selected === 'none') {
             this.setState({selected: 'none'})
         } else if (selected === 'word') {
@@ -57,7 +57,7 @@ class App extends Component{
     }
 
     render(){
-        const {loading, selected, exceptionType, isException} = this.state
+        const {words, loading, selected, exceptionType, isException} = this.state
 
         let filterWords;
         
@@ -80,7 +80,6 @@ class App extends Component{
                 word.word_class.includes(this.state.Query)
             );
         }
-        
 
         if(loading){ // loading의 상태값이 true이면
             return(
@@ -94,7 +93,7 @@ class App extends Component{
                     <div className="searchArea">
                         <div className="container">
                             <div className="row">
-                                <Search handleInput={this.handleInput} changefilter={this.changefilter}/>
+                                <Search words={words} handleInput={this.handleInput} changeSelected={this.changeSelected}/>
                             </div>
                         </div>
                     </div>

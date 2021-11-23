@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react';
 import SearchBar from './SearchBar';
-import datas from './Keyword.js';
 
-const Search = (props) => {
+const Search = ({words, handleInput, changeSelected}) => {
     // 입력창에 입력한 텍스트 
     const [Query, setQuery] = useState(""); // value=""와 동일
     const [results, setResult] = useState([]); // 검색어 자동완성 텍스트
     const [Selected, setSelected] = useState("none");
+    const [autocomplete, setAutocomplete] = useState(0);
     const queryRef = useRef();
   
     // 필드를 업데이트 
@@ -15,11 +15,26 @@ const Search = (props) => {
         if (field === 'keyword') { setQuery(value); } // 필드가 keyword면 keyword값 변경 / results면 results값 변경
         if (field === 'results') { setResult(value); }
     }
-  
+    
     // 입력된 텍스트로 data 배열에서 찾아 매칭되는 결과들을 저장 
     const onSearch = text => {
-        var results = datas.filter(item => true === matchName(item.word, text));
-        setResult({ results });
+        if (Selected === 'none' || Selected === 'word') {
+            const datas = words.filter((word, idx, arr) => {
+                return arr.findIndex((item) => item.keyword === word.keyword) === idx
+            });
+            var results = datas.filter(item => {
+                return true === matchName(item.keyword, text)
+            });
+            setResult({ results });
+        } else if (Selected === 'wordclass') {
+            const datas = words.filter((word, idx, arr) => {
+                return arr.findIndex((item) => item.word_class === word.word_class) === idx
+            });
+            var results = datas.filter(item => {
+                return true === matchName(item.word_class, text)
+            });
+            setResult({ results });
+        }
     };
 
     // 검색해야할 문자열을 키워드와 비교하여 매칭이 되는지 체크 
@@ -39,15 +54,14 @@ const Search = (props) => {
     ]
 
     //select 구현 및 이벤트 
-    const SelectBox = (props) => {
+    const SelectBox = ({options, defaultValue}) => {
         const handleSelect = (e) => {
             setSelected(e.target.value)
-            console.log(e.target.value);
         }
         return(
             <select value={Selected} name="select" className="form-control" id="select" onChange={handleSelect}>
-                {props.options.map((options) => (
-                    <option key={options.value} value={options.value} defaultValue={props.defaultValue === options.value}>{options.name}</option>
+                {options.map((options) => (
+                    <option key={options.value} value={options.value} defaultValue={defaultValue === options.value}>{options.name}</option>
                 ))}
             </select>
         )
@@ -55,21 +69,25 @@ const Search = (props) => {
 
     // 버튼 클릭 이벤트
     const onClick = () => {
-        props.handleInput(Query)
-        props.changefilter(Selected)
+        handleInput(Query)
+        changeSelected(Selected)
     }
 
     // 키보드 이벤트
-    const onKeyEvent = (e) => {
+    const onKeyEvent = (e, arr) => {
         if(e.key === 'Enter'){
             onClick()
-        } else if (e.keyCode === 40) {
-            console.log('1')
-            queryRef.current.focus()
         } else if (e.keyCode === 38) {
-            console.log('2')
-            queryRef.current.focus()
-        }
+            if (autocomplete.length > 0) {
+                console.log(e.key)
+                queryRef.current.click()
+            }
+        } else if (e.keyCode === 40) {
+            if (autocomplete.length > 0) {
+                console.log(e.key)
+                queryRef.current.focus()
+            }
+        } 
     }
 
     return (
@@ -80,8 +98,9 @@ const Search = (props) => {
                 <SearchBar 
                     keyword={Query} 
                     results={results} 
+                    Selected={Selected}
                     updateField={updateField} 
-                    onKeyPress={e => onKeyEvent(e)} 
+                    onKeyDown={e => onKeyEvent(e)} 
                     textInput={queryRef}/>
             <div className="col-3 buttonArea">
                 <input 
