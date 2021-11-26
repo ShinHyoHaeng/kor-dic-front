@@ -6,8 +6,8 @@ const Search = ({words, handleInput, changeSelected}) => {
     const [Query, setQuery] = useState(""); // value=""와 동일
     const [results, setResult] = useState([]); // 검색어 자동완성 텍스트
     const [Selected, setSelected] = useState("none");
-    const [autocomplete, setAutocomplete] = useState(0);
-    const queryRef = useRef();
+    const [idx, setIdx] = useState(0);
+    const queryRef = useRef([]);
   
     // 필드를 업데이트 
     const updateField = (field, value, update = true) => {
@@ -73,23 +73,41 @@ const Search = ({words, handleInput, changeSelected}) => {
         changeSelected(Selected)
     }
 
+    // 인덱스 조절
+    const decreaseIndex = () => {
+		const nextIndex = idx - 1
+		setIdx(nextIndex < 0 ? 0 : nextIndex)
+	}
+	const increaseIndex = (autocomplete) => {
+		const nextIndex = idx + 1
+		setIdx(nextIndex > autocomplete - 1 ? autocomplete - 1 : nextIndex)
+	}
+
     // 키보드 이벤트
-    const onKeyEvent = (e, arr) => {
-        if(e.key === 'Enter'){
-            onClick()
+    const onKeyEvent = (e, num) => {
+        if (num.length === 0) setIdx(0)
+        if (e.key === 'Enter'){
+            if (num.length > 0) {
+                queryRef.current[idx].click()
+                setIdx(0)
+            } else {
+                onClick()
+                setIdx(0)
+            }
         } else if (e.keyCode === 38) {
-            if (autocomplete.length > 0) {
-                console.log(e.key)
-                queryRef.current.click()
+            if (num.length > 0) {
+                decreaseIndex()
+                queryRef.current[idx].focus()
             }
         } else if (e.keyCode === 40) {
-            if (autocomplete.length > 0) {
-                console.log(e.key)
-                queryRef.current.focus()
+            if (num.length > 0) {
+                increaseIndex(num.length)
+                queryRef.current[idx].focus()
             }
         } 
     }
 
+    console.log(queryRef.current)
     return (
         <div className="searchInner">
             <div className="col-3 selectArea">
@@ -100,8 +118,9 @@ const Search = ({words, handleInput, changeSelected}) => {
                     results={results} 
                     Selected={Selected}
                     updateField={updateField} 
-                    onKeyDown={e => onKeyEvent(e)} 
-                    textInput={queryRef}/>
+                    onKeyDown={onKeyEvent} 
+                    textInput={queryRef}
+                    autocomplete={queryRef && queryRef.current[idx] ? queryRef.current[idx].innerHTML:''}/>
             <div className="col-3 buttonArea">
                 <input 
                     type="submit" 

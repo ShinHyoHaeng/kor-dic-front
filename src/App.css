@@ -40,6 +40,7 @@ input:focus, select:focus, option:focus, textarea:focus, button:focus{outline: n
 .autocomplete-items div {padding: 1em 1.5em; cursor: pointer; border-bottom:1px solid rgba(119,101,90,0.3); font-size:0.75em;}
 .autocomplete-items div:last-child{border-bottom:0;}
 .autocomplete-items div:hover {background-color: #eaeae0;}
+.autocomplete-item.active {background-color: #eaeae0;}
 .autocomplete-active {background-color: DodgerBlue !important; color: #881414;}
 
 /* animation */
